@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hangman</title>
+    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAXGxqIdwQy8m9W3K-Rp80DBQzie5hOHP4",
+        authDomain: "szte-hangman.firebaseapp.com",
+        databaseURL: "https://szte-hangman.firebaseio.com",
+        projectId: "szte-hangman",
+        storageBucket: "szte-hangman.appspot.com",
+        messagingSenderId: "1027504785646"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script defer src="/__/firebase/5.9.3/firebase-app.js"></script>
+    <script defer src="/__/firebase/5.9.3/firebase-auth.js"></script>
+    <script defer src="/__/firebase/5.9.3/firebase-database.js"></script>
+    <script defer src="/__/firebase/5.9.3/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/5.9.3/firebase-storage.js"></script>
+    <script defer src="/__/firebase/init.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    <link rel="icon" type="image/x-icon" href="images/hang.png">
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div id="header">
+        <div id="header-title">
+          Hangman
+        </div>
+        <div id="header-author">
+          Credit &copy Polyák Zoltán
+        </div>
+      </div>
+      <div id="board">
+        <canvas id="board-canvas"></canvas>
+      </div>
+      <div class="sidebar">
+          <h3 id="sidebar-title">Szavak a halmazban</h3>
+          <div class="sidebar-wrapper">
+              
+          </div>  
+      </div>
+      <div id="word">
+        <div class="word-blankletter" v-for="letter in wordDivs" v-cloak>{{ letter }}</div>
+      </div>
+      <div id="keyboard">
+        <div v-for="row in letters" class="keyboard-row">
+          <letter-button v-for="letter in row" :letter="letter" :game-over="gameOver" :key="letter" @check="check(letter)" v-cloak></letter-button>
+        </div>
+      </div>
+      <div id="buttons">
+        <button class="buttons-button orange" :class="{ hidden: gameOver }" @click="playAgain">Play</button>
+        <button id="playagain" class="buttons-button" :class="{ hidden: !gameOver }" @click="playAgain">Play Again</button>
+      </div>
+    </div>
+    <script type="text/javascript" src="javascripts/index.js"></script>
+  </body>
+</html>

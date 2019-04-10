@@ -3,10 +3,26 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// START - Firebase App is always required and must be first
+const admin = require('firebase-admin');
 
+var serviceAccount = require('./szte-hangman-adminsdk.json');
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
+var db = admin.firestore();
+var docRef = db.collection('users').doc('alovelace');
+
+var setAda = docRef.set({
+  first: 'Ada',
+  last: 'Lovelace',
+  born: 1815
+});
+
+// END ---
 var app = express();
 
 // view engine setup
@@ -20,7 +36,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -39,14 +54,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
-/*var ref = firebase.database().ref("words");
-leadsRef.on('name', function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-      var childData = childSnapshot.val();
-      console.log(childSnapshot);
-    });
-});
-leadsRef.on('child_added', function(snapshot) {
-  console.log(snapshot);
-});*/

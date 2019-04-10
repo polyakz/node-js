@@ -4,22 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hangman</title>
-    <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
-    <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyAXGxqIdwQy8m9W3K-Rp80DBQzie5hOHP4",
-        authDomain: "szte-hangman.firebaseapp.com",
-        databaseURL: "https://szte-hangman.firebaseio.com",
-        projectId: "szte-hangman",
-        storageBucket: "szte-hangman.appspot.com",
-        messagingSenderId: "1027504785646"
-      };
-      firebase.initializeApp(config);
-    </script>
+    <script defer src="/__/firebase/5.9.3/firebase.js"></script>
     <script defer src="/__/firebase/5.9.3/firebase-app.js"></script>
     <script defer src="/__/firebase/5.9.3/firebase-auth.js"></script>
     <script defer src="/__/firebase/5.9.3/firebase-database.js"></script>
+    <script defer src="/__/firebase/5.9.3/firebase-firestore.js"></script>
     <script defer src="/__/firebase/5.9.3/firebase-messaging.js"></script>
     <script defer src="/__/firebase/5.9.3/firebase-storage.js"></script>
     <script defer src="/__/firebase/init.js"></script>
@@ -28,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
     <link rel="icon" type="image/x-icon" href="images/hang.png">
     <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   </head>
   <body>
     <div id="app">
@@ -44,8 +34,8 @@
       </div>
       <div class="sidebar">
           <h3 id="sidebar-title">Szavak a halmazban</h3>
-          <div class="sidebar-wrapper">
-              
+          <div id="sidebar-wrapper">
+              <button id="get-all-words">Show all words</button>
           </div>  
       </div>
       <div id="word">

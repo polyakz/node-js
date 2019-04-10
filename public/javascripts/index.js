@@ -227,4 +227,3 @@ mounted: function() {
     this.makeBlanks();
 }
 });
-
